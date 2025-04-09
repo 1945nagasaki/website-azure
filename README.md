@@ -5,7 +5,6 @@ primeira pagina:A primeira pagina teria animes mais avaliados, recem lançados, 
 segunda pagina:Uma pagina com uma barra de pesquisa na parte superior e abaixo teria os generos dos animes e mangas.
 terceira pagina: Estaria os mangas mais avaliados, recem lançados, populares, coloridos e preto e branco.
 paleta de cores:cor principal: branco . cor secundaria: azul
-icon:Um olho azul realista
 
 
 
