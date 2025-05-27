@@ -1,30 +1,71 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>NeoAnime</title>
-  <link rel="stylesheet" href="style.css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Clínica de Fisioterapia</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <!-- Primeira Página - Animes -->
-  <div class="page" id="pagina1">
-    <h1>NeoAnime</h1>
-    <section>
-      <h2>Animes Mais Avaliados</h2>
-      <div class="content-box">Conteúdo de exemplo</div>
-    </section>
-    <section>
-      <h2>Recém Lançados</h2>
-      <div class="content-box">Conteúdo de exemplo</div>
-    </section>
-    <section>
-      <h2>Populares</h2>
-      <div class="content-box">Conteúdo de exemplo</div>
-    </section>
-    <section>
-      <h2>Legendados</h2>
-      <div class="content-box">Conteúdo de exemplo</div>
-    </section>
-    <section>
-      <h2>Dublados</
+    <div class="container">
+        <h2>LOGIN</h2>
+        <form id="loginForm">
+            <input type="email" id="emailLogin" placeholder="E-mail" required>
+            <input type="password" id="senhaLogin" placeholder="Senha" required>
+            <button type="submit">Entrar</button>
+        </form>
+        <p>Não tem cadastro? <a href="cadastro.html">Criar Usuário</a></p>
+        <p id="mensagem"></p>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro - Clínica de Fisioterapia</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h2>Cadastro de Usuário</h2>
+        <form id="cadastroForm">
+            <input type="text" id="nome" placeholder="Nome" required>
+            <input type="date" id="dataNascimento" required>
+            <input type="text" id="esporte" placeholder="Esporte" required>
+            <input type="email" id="emailCadastro" placeholder="E-mail" required>
+            <input type="password" id="senhaCadastro" placeholder="Senha" required>
+            <button type="submit">Cadastrar</button>
+        </form>
+        <p id="mensagemCadastro"></p>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Selecionar Horário</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h2>Escolha um horário para sua consulta</h2>
+        <form id="horarioForm">
+            <select id="horario">
+                <option value="2h">2 horas</option>
+                <option value="3h">3 horas</option>
+                <option value="16h">16 horas</option>
+                <option value="16h30">16:30 horas</option>
+            </select>
+            <button type="submit">Confirmar</button>
+        </form>
+    </div>
+</body>
+</html>
