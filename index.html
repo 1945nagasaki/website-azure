@@ -1,519 +1,94 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SaniBot - Seu Amigo de Limpeza Doméstica</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css">
+    <title>Robôs de Limpeza - Seu Lar Impecável</title>
+    <link rel="stylesheet" href="style.css">
 </head>
-<body style="background-color: #e6f2ff;">
-    
-    <!-- Navbar -->
-    <nav class="blue-gradient shadow-lg border-b border-blue-300">
-        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
-            <div class="flex items-center space-x-2">
-                <div class="text-3xl font-bold text-white glow-text">SaniBot</div>
-            </div>
-            <div class="flex space-x-4 items-center">
-                <a href="#sobre" class="text-white hover:text-blue-100 transition">Sobre</a>
-                <a href="#produto" class="text-white hover:text-blue-100 transition">EchoBot</a>
-                <a href="#contato" class="text-white hover:text-blue-100 transition">Contato</a>
-                <a href="#" class="bg-white text-[#007fff] px-4 py-2 rounded-lg font-medium hover:bg-blue-50 transition border border-blue-300 glow-border">Comprar</a>
-            </div>
+<body>
+    <header>
+        <div class="container">
+            <h1><a href="/">Robôs de Limpeza</a></h1>
+            <nav>
+                <ul>
+                    <li><a href="#">Produtos</a></li>
+                    <li><a href="#">Sobre Nós</a></li>
+                    <li><a href="#">Contato</a></li>
+                    <li><a href="#">Carrinho (0)</a></li>
+                </ul>
+            </nav>
         </div>
-    </nav>
+    </header>
 
-    <!-- Hero Section -->
-    <section class="py-16 md:py-24 px-4 city-bg" style="min-height: 80vh;">
-        <div class="container mx-auto flex flex-col md:flex-row items-center">
-            <div class="md:w-1/2 mb-10 md:mb-0">
-                <h1 class="text-4xl md:text-5xl font-bold text-[#007fff] mb-6">Conheça o <span class="glow-text text-[#007fff]">EchoBot</span></h1>
-                <p class="text-xl text-[#00508c] mb-8">Seu novo amigo para resolver pequenos problemas domésticos com grande eficiência.</p>
-                <div class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
-                    <a href="#produto" class="blue-gradient text-white px-8 py-3 rounded-lg font-medium text-center hover:opacity-90 transition shadow-lg border border-blue-300 glow-border">Ver Produto</a>
-                    <a href="#" onclick="document.getElementById('detalhes').scrollIntoView({behavior: 'smooth'})" class="bg-white text-[#007fff] border border-blue-300 px-8 py-3 rounded-lg font-medium text-center hover:bg-blue-50 transition glow-border">Saiba Mais</a>
+    <main>
+        <section class="hero">
+            <div class="container">
+                <div class="hero-content">
+                    <h2>Liberte-se da Limpeza!</h2>
+                    <p>Encontre o robô de limpeza perfeito para o seu lar.</p>
+                    <a href="#" class="button">Ver Produtos</a>
                 </div>
+                <div class="hero-image">
+                    <img src="placeholder-robo.png" alt="Robô de Limpeza">
+                    </div>
             </div>
-            <div class="md:w-1/2 flex justify-center">
-                <div class="relative">
-                    <svg class="w-full max-w-md" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
-                        <!-- Robot Body -->
-                        <rect id="robot-body" x="60" y="80" width="80" height="70" rx="10" class="robot-body-color" fill="#007fff"/>
-                        <!-- Robot Head -->
-                        <rect id="robot-head" x="70" y="40" width="60" height="50" rx="10" class="robot-head-color" fill="#007fff"/>
-                        <!-- Robot Eyes -->
-                        <circle cx="85" cy="60" r="8" fill="white"/>
-                        <circle cx="115" cy="60" r="8" fill="white"/>
-                        <circle cx="85" cy="60" r="4" fill="#3399ff"/>
-                        <circle cx="115" cy="60" r="4" fill="#3399ff"/>
-                        <!-- Robot Arms -->
-                        <rect x="40" y="90" width="20" height="10" rx="5" class="robot-body-color" fill="#007fff"/>
-                        <rect x="140" y="90" width="20" height="10" rx="5" class="robot-body-color" fill="#007fff"/>
-                        <!-- Robot Wheels -->
-                        <circle cx="80" cy="160" r="10" fill="#3399ff"/>
-                        <circle cx="120" cy="160" r="10" fill="#3399ff"/>
-                        <!-- Robot Details -->
-                        <rect x="75" y="100" width="50" height="20" rx="5" fill="white" opacity="0.7"/>
-                        <circle cx="85" cy="110" r="5" fill="#3399ff"/>
-                        <circle cx="100" cy="110" r="5" fill="#3399ff"/>
-                        <circle cx="115" cy="110" r="5" fill="#3399ff"/>
-                    </svg>
-                </div>
-            </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- Sobre a Empresa -->
-    <section id="sobre" class="py-16 bg-white px-4 border-t border-b border-blue-200">
-        <div class="container mx-auto">
-            <h2 class="text-3xl font-bold text-center text-[#007fff] mb-12">Sobre a SaniBot</h2>
-            <div class="flex flex-col md:flex-row items-center">
-                <div class="md:w-1/2 mb-8 md:mb-0">
-                    <div class="bg-[#e6f2ff] p-8 rounded-xl border border-blue-200">
-                        <h3 class="text-2xl font-semibold text-[#007fff] mb-4">Nossa Missão</h3>
-                        <p class="text-[#00508c] mb-4">Na SaniBot, acreditamos que a tecnologia deve simplificar sua vida. Criamos soluções robóticas que transformam tarefas domésticas em experiências agradáveis.</p>
-                        <p class="text-[#00508c]">Nossa missão é trazer para seu lar um "amigo" tecnológico que resolve pequenos problemas do dia a dia, permitindo que você tenha mais tempo para o que realmente importa.</p>
+        <section class="products">
+            <div class="container">
+                <h2>Nossos Robôs de Limpeza</h2>
+                <div class="product-grid">
+                    <div class="product-card">
+                        <img src="placeholder-robo-pequeno.png" alt="Robô Modelo 1">
+                        <h3>Robô Aspirador Inteligente</h3>
+                        <p>Ideal para todos os tipos de piso.</p>
+                        <span class="price">R$ 499,99</span>
+                        <button class="button">Adicionar ao Carrinho</button>
                     </div>
-                </div>
-                <div class="md:w-1/2 md:pl-12">
-                    <div class="space-y-6">
-                        <div class="flex items-start">
-                            <div class="bg-[#e6f2ff] p-3 rounded-full text-[#007fff] mr-4 border border-blue-300">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-                                </svg>
-                            </div>
-                            <div>
-                                <h4 class="text-xl font-medium text-[#007fff]">Inovação Constante</h4>
-                                <p class="text-[#00508c]">Estamos sempre aprimorando nossos produtos para oferecer a melhor experiência.</p>
-                            </div>
-                        </div>
-                        <div class="flex items-start">
-                            <div class="bg-[#e6f2ff] p-3 rounded-full text-[#007fff] mr-4 border border-blue-300">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
-                                </svg>
-                            </div>
-                            <div>
-                                <h4 class="text-xl font-medium text-[#007fff]">Qualidade Superior</h4>
-                                <p class="text-[#00508c]">Cada EchoBot é produzido com materiais de alta durabilidade e tecnologia avançada.</p>
-                            </div>
-                        </div>
-                        <div class="flex items-start">
-                            <div class="bg-[#e6f2ff] p-3 rounded-full text-[#007fff] mr-4 border border-blue-300">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 10h4.764a2 2 0 011.789 2.894l-3.5 7A2 2 0 0115.263 21h-4.017c-.163 0-.326-.02-.485-.06L7 20m7-10V5a2 2 0 00-2-2h-.095c-.5 0-.905.405-.905.905 0 .714-.211 1.412-.608 2.006L7 11v9m7-10h-2M7 20H5a2 2 0 01-2-2v-6a2 2 0 012-2h2.5" />
-                                </svg>
-                            </div>
-                            <div>
-                                <h4 class="text-xl font-medium text-[#007fff]">Satisfação Garantida</h4>
-                                <p class="text-[#00508c]">Nossos clientes são nossa prioridade. Oferecemos suporte completo e garantia estendida.</p>
-                            </div>
-                        </div>
+                    <div class="product-card">
+                        <img src="placeholder-robo-pequeno.png" alt="Robô Modelo 2">
+                        <h3>Robô Aspirador e Passa Pano</h3>
+                        <p>Limpeza completa para sua casa.</p>
+                        <span class="price">R$ 799,99</span>
+                        <button class="button">Adicionar ao Carrinho</button>
                     </div>
-                </div>
+                    <div class="product-card">
+                        <img src="placeholder-robo-pequeno.png" alt="Robô Modelo 3">
+                        <h3>Robô Limpa Vidros Automático</h3>
+                        <p>Janelas limpas sem esforço.</p>
+                        <span class="price">R$ 549,99</span>
+                        <button class="button">Adicionar ao Carrinho</button>
+                    </div>
+                    </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- Produto EchoBot -->
-    <section id="produto" class="py-16 px-4 blue-gradient text-white">
-        <div class="container mx-auto">
-            <h2 class="text-3xl font-bold text-center mb-16 text-white glow-text">Conheça o EchoBot</h2>
-            <div class="flex flex-col md:flex-row items-center">
-                <div class="md:w-1/2 mb-10 md:mb-0">
-                    <svg class="w-full max-w-md mx-auto" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
-                        <!-- Robot Body -->
-                        <rect id="robot-body-display" x="60" y="80" width="80" height="70" rx="10" class="robot-body-color" fill="#007fff"/>
-                        <!-- Robot Head -->
-                        <rect id="robot-head-display" x="70" y="40" width="60" height="50" rx="10" class="robot-head-color" fill="#007fff"/>
-                        <!-- Robot Eyes -->
-                        <circle cx="85" cy="60" r="8" fill="white"/>
-                        <circle cx="115" cy="60" r="8" fill="white"/>
-                        <circle cx="85" cy="60" r="4" fill="#3399ff"/>
-                        <circle cx="115" cy="60" r="4" fill="#3399ff"/>
-                        <!-- Robot Arms -->
-                        <rect x="40" y="90" width="20" height="10" rx="5" class="robot-body-color" fill="#007fff"/>
-                        <rect x="140" y="90" width="20" height="10" rx="5" class="robot-body-color" fill="#007fff"/>
-                        <!-- Robot Wheels -->
-                        <circle cx="80" cy="160" r="10" fill="#3399ff"/>
-                        <circle cx="120" cy="160" r="10" fill="#3399ff"/>
-                        <!-- Robot Details -->
-                        <rect x="75" y="100" width="50" height="20" rx="5" fill="white" opacity="0.7"/>
-                        <circle cx="85" cy="110" r="5" fill="#3399ff"/>
-                        <circle cx="100" cy="110" r="5" fill="#3399ff"/>
-                        <circle cx="115" cy="110" r="5" fill="#3399ff"/>
-                        <!-- Cleaning Animation -->
-                        <g id="cleaning-animation" opacity="0.7">
-                            <circle cx="40" cy="140" r="5" fill="white">
-                                <animate attributeName="cx" values="40;160;40" dur="3s" repeatCount="indefinite" />
-                            </circle>
-                            <circle cx="50" cy="150" r="3" fill="white">
-                                <animate attributeName="cx" values="50;170;50" dur="4s" repeatCount="indefinite" />
-                            </circle>
-                            <circle cx="60" cy="145" r="4" fill="white">
-                                <animate attributeName="cx" values="60;180;60" dur="3.5s" repeatCount="indefinite" />
-                            </circle>
-                        </g>
-                    </svg>
-                    <div class="mt-8 text-center">
-                        <p class="mb-4 font-medium">Personalize seu EchoBot:</p>
-                        
-                        <div class="mb-6">
-                            <h4 class="text-lg font-medium mb-3">Corpo do Robô</h4>
-                            <div class="flex justify-center space-x-3">
-                                <!-- Cores Primárias -->
-                                <div class="color-option body-color w-8 h-8 rounded-full bg-[#007fff] border-2 border-white active" data-color="#007fff" title="Azul LED"></div>
-                                <div class="color-option body-color w-8 h-8 rounded-full bg-red-500 border-2 border-transparent" data-color="#ef4444" title="Vermelho"></div>
-                                <div class="color-option body-color w-8 h-8 rounded-full bg-yellow-400 border-2 border-transparent" data-color="#facc15" title="Amarelo"></div>
-                                <div class="color-option body-color w-8 h-8 rounded-full bg-cyan-500 border-2 border-transparent" data-color="#06b6d4" title="Ciano"></div>
-                            </div>
-                            
-                            <div class="flex justify-center space-x-3 mt-2">
-                                <!-- Cores Secundárias -->
-                                <div class="color-option body-color w-8 h-8 rounded-full bg-green-500 border-2 border-transparent" data-color="#22c55e" title="Verde"></div>
-                                <div class="color-option body-color w-8 h-8 rounded-full bg-purple-500 border-2 border-transparent" data-color="#a855f7" title="Roxo"></div>
-                                <div class="color-option body-color w-8 h-8 rounded-full bg-orange-500 border-2 border-transparent" data-color="#f97316" title="Laranja"></div>
-                                <div class="color-option body-color w-8 h-8 rounded-full bg-pink-500 border-2 border-transparent" data-color="#ec4899" title="Rosa"></div>
-                            </div>
-                        </div>
-                        
-                        <div>
-                            <h4 class="text-lg font-medium mb-3">Cabeça do Robô</h4>
-                            <div class="flex justify-center space-x-3">
-                                <!-- Cores Primárias -->
-                                <div class="color-option head-color w-8 h-8 rounded-full bg-[#007fff] border-2 border-white active" data-color="#007fff" title="Azul LED"></div>
-                                <div class="color-option head-color w-8 h-8 rounded-full bg-red-500 border-2 border-transparent" data-color="#ef4444" title="Vermelho"></div>
-                                <div class="color-option head-color w-8 h-8 rounded-full bg-yellow-400 border-2 border-transparent" data-color="#facc15" title="Amarelo"></div>
-                                <div class="color-option head-color w-8 h-8 rounded-full bg-cyan-500 border-2 border-transparent" data-color="#06b6d4" title="Ciano"></div>
-                            </div>
-                            
-                            <div class="flex justify-center space-x-3 mt-2">
-                                <!-- Cores Secundárias -->
-                                <div class="color-option head-color w-8 h-8 rounded-full bg-green-500 border-2 border-transparent" data-color="#22c55e" title="Verde"></div>
-                                <div class="color-option head-color w-8 h-8 rounded-full bg-purple-500 border-2 border-transparent" data-color="#a855f7" title="Roxo"></div>
-                                <div class="color-option head-color w-8 h-8 rounded-full bg-orange-500 border-2 border-transparent" data-color="#f97316" title="Laranja"></div>
-                                <div class="color-option head-color w-8 h-8 rounded-full bg-pink-500 border-2 border-transparent" data-color="#ec4899" title="Rosa"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="md:w-1/2 md:pl-12">
-                    <h3 class="text-2xl font-semibold mb-6 text-white">Seu Assistente Doméstico Inteligente</h3>
-                    <p class="mb-6">O EchoBot foi projetado para tornar sua vida mais fácil. Com tecnologia avançada de reconhecimento de ambiente, ele cuida das tarefas domésticas enquanto você aproveita seu tempo com o que realmente importa.</p>
-                    
-                    <div class="bg-white bg-opacity-20 p-6 rounded-xl mb-8 border border-blue-300">
-                        <h4 class="text-xl font-medium mb-4 text-white">Por que escolher o EchoBot?</h4>
-                        <ul class="space-y-3">
-                            <li class="flex items-center">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-                                </svg>
-                                Tecnologia de limpeza avançada
-                            </li>
-                            <li class="flex items-center">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-                                </svg>
-                                Bateria de longa duração (até 8 horas)
-                            </li>
-                            <li class="flex items-center">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-                                </svg>
-                                Controle por aplicativo ou voz
-                            </li>
-                            <li class="flex items-center">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-                                </svg>
-                                Personalização completa de cores
-                            </li>
-                            <li class="flex items-center">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-                                </svg>
-                                Garantia de 2 anos
-                            </li>
-                        </ul>
-                    </div>
-                    
-                    <div class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
-                        <a href="#" class="bg-white text-[#007fff] px-8 py-3 rounded-lg font-medium text-center hover:bg-blue-50 transition border border-blue-300 glow-border">Comprar Agora</a>
-                        <a href="#detalhes" class="bg-transparent border border-white px-8 py-3 rounded-lg font-medium text-center hover:bg-white hover:bg-opacity-10 transition">Saiba Mais</a>
-                    </div>
-                </div>
+        <section class="about">
+            <div class="container">
+                <h2>Sobre Nós</h2>
+                <p>Somos especialistas em robôs de limpeza, oferecendo soluções inovadoras para facilitar o seu dia a dia. Nossa missão é proporcionar mais tempo livre para você aproveitar o que realmente importa.</p>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- Detalhes do Produto -->
-    <section id="detalhes" class="py-16 px-4 bg-[#e6f2ff] border-t border-blue-200">
-        <div class="container mx-auto">
-            <h2 class="text-3xl font-bold text-center text-[#007fff] mb-12 glow-text">O que o EchoBot pode fazer por você</h2>
-            
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <div class="bg-white rounded-xl p-6 shadow-md hover:shadow-lg transition border border-blue-200">
-                    <div class="bg-[#e6f2ff] text-[#007fff] p-3 rounded-full w-14 h-14 flex items-center justify-center mb-4 border border-blue-300">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
-                        </svg>
-                    </div>
-                    <h3 class="text-xl font-semibold text-[#007fff] mb-3">Limpeza Completa</h3>
-                    <p class="text-[#00508c]">O EchoBot varre, aspira e passa pano em todos os tipos de pisos. Seu sistema inteligente detecta o tipo de superfície e ajusta a limpeza automaticamente.</p>
-                </div>
-                
-                <div class="bg-white rounded-xl p-6 shadow-md hover:shadow-lg transition border border-blue-200">
-                    <div class="bg-[#e6f2ff] text-[#007fff] p-3 rounded-full w-14 h-14 flex items-center justify-center mb-4 border border-blue-300">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
-                        </svg>
-                    </div>
-                    <h3 class="text-xl font-semibold text-[#007fff] mb-3">Organização</h3>
-                    <p class="text-[#00508c]">Com braços articulados, o EchoBot consegue organizar objetos pequenos e médios, arrumando quartos e salas com eficiência surpreendente.</p>
-                </div>
-                
-                <div class="bg-white rounded-xl p-6 shadow-md hover:shadow-lg transition border border-blue-200">
-                    <div class="bg-[#e6f2ff] text-[#007fff] p-3 rounded-full w-14 h-14 flex items-center justify-center mb-4 border border-blue-300">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                        </svg>
-                    </div>
-                    <h3 class="text-xl font-semibold text-[#007fff] mb-3">Lavagem de Louça</h3>
-                    <p class="text-[#00508c]">Equipado com sistema de reconhecimento de objetos, o EchoBot lava e organiza sua louça com cuidado e precisão.</p>
-                </div>
+        <section class="contact">
+            <div class="container">
+                <h2>Entre em Contato</h2>
+                <p>Dúvidas ou sugestões? Fale conosco!</p>
+                <form>
+                    <input type="text" placeholder="Seu Nome">
+                    <input type="email" placeholder="Seu Email">
+                    <textarea placeholder="Sua Mensagem"></textarea>
+                    <button type="submit" class="button">Enviar Mensagem</button>
+                </form>
             </div>
-            
-            <div class="mt-16">
-                <h3 class="text-2xl font-semibold text-[#007fff] mb-6 text-center">Especificações Técnicas</h3>
-                <div class="bg-white rounded-xl p-8 shadow-md border border-blue-200">
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <div>
-                            <h4 class="text-lg font-medium text-[#007fff] mb-4">Características Físicas</h4>
-                            <ul class="space-y-2 text-[#00508c]">
-                                <li class="flex items-start">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 text-[#007fff] mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                                    </svg>
-                                    <span><strong class="text-[#007fff]">Dimensões:</strong> 30cm x 30cm x 40cm</span>
-                                </li>
-                                <li class="flex items-start">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 text-[#007fff] mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                                    </svg>
-                                    <span><strong class="text-[#007fff]">Peso:</strong> 5kg</span>
-                                </li>
-                                <li class="flex items-start">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 text-[#007fff] mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                                    </svg>
-                                    <span><strong class="text-[#007fff]">Material:</strong> Plástico ABS de alta resistência</span>
-                                </li>
-                                <li class="flex items-start">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 text-[#007fff] mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                                    </svg>
-                                    <span><strong class="text-[#007fff]">Cores disponíveis:</strong> Personalizável (8 cores diferentes)</span>
-                                </li>
-                            </ul>
-                        </div>
-                        <div>
-                            <h4 class="text-lg font-medium text-[#007fff] mb-4">Características Técnicas</h4>
-                            <ul class="space-y-2 text-[#00508c]">
-                                <li class="flex items-start">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 text-[#007fff] mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                                    </svg>
-                                    <span><strong class="text-[#007fff]">Bateria:</strong> Lítio 5000mAh (8 horas de uso)</span>
-                                </li>
-                                <li class="flex items-start">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 text-[#007fff] mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                                    </svg>
-                                    <span><strong class="text-[#007fff]">Conectividade:</strong> Wi-Fi, Bluetooth</span>
-                                </li>
-                                <li class="flex items-start">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 text-[#007fff] mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                                    </svg>
-                                    <span><strong class="text-[#007fff]">Sensores:</strong> Infravermelho, Ultrassônico, Câmera HD</span>
-                                </li>
-                                <li class="flex items-start">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 text-[#007fff] mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                                    </svg>
-                                    <span><strong class="text-[#007fff]">Capacidade:</strong> Reservatório de água de 300ml</span>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="mt-12 text-center">
-                <a href="#" class="blue-gradient text-white px-10 py-4 rounded-lg font-medium inline-block hover:opacity-90 transition shadow-lg border border-blue-300 glow-border">Adquira seu EchoBot Agora</a>
-            </div>
-        </div>
-    </section>
+        </section>
+    </main>
 
-    <!-- Contato -->
-    <section id="contato" class="py-16 px-4 bg-white border-t border-blue-200">
-        <div class="container mx-auto">
-            <h2 class="text-3xl font-bold text-center text-[#007fff] mb-12">Entre em Contato</h2>
-            
-            <div class="bg-[#e6f2ff] rounded-xl shadow-md p-8 max-w-3xl mx-auto border border-blue-200">
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                    <div>
-                        <h3 class="text-xl font-semibold text-[#007fff] mb-6">Informações de Contato</h3>
-                        <div class="space-y-4">
-                            <div class="flex items-start">
-                                <div class="bg-[#d1e7ff] p-2 rounded-full text-[#007fff] mr-4 border border-blue-300">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
-                                    </svg>
-                                </div>
-                                <div>
-                                    <p class="text-[#3399ff] text-sm">Telefones</p>
-                                    <p class="text-[#00508c]">(14) 99688-0452</p>
-                                    <p class="text-[#00508c]">(14) 99761-4102</p>
-                                </div>
-                            </div>
-                            
-                            <div class="flex items-start">
-                                <div class="bg-[#d1e7ff] p-2 rounded-full text-[#007fff] mr-4 border border-blue-300">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                                    </svg>
-                                </div>
-                                <div>
-                                    <p class="text-[#3399ff] text-sm">E-mails</p>
-                                    <p class="text-[#00508c]">bernardoydenki@gmail.com</p>
-                                    <p class="text-[#00508c]">kibbyns@gmail.com</p>
-                                    <p class="text-[#00508c]">2sa8bot@gmail.com</p>
-                                </div>
-                            </div>
-                            
-                            <div class="flex items-start">
-                                <div class="bg-[#d1e7ff] p-2 rounded-full text-[#007fff] mr-4 border border-blue-300">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-                                    </svg>
-                                </div>
-                                <div>
-                                    <p class="text-[#3399ff] text-sm">Horário de Atendimento</p>
-                                    <p class="text-[#00508c]">Segunda a Sexta: 8h às 18h</p>
-                                    <p class="text-[#00508c]">Sábado: 9h às 13h</p>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class="mt-8">
-                            <h4 class="font-medium text-[#007fff] mb-3">Siga-nos nas redes sociais</h4>
-                            <div class="flex space-x-4">
-                                <a href="https://www.facebook.com/profile.php?id=." target="_blank" class="bg-[#d1e7ff] p-2 rounded-full text-[#007fff] hover:bg-[#007fff] hover:text-white transition border border-blue-300">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
-                                        <path d="M9 8h-3v4h3v12h5v-12h3.642l.358-4h-4v-1.667c0-.955.192-1.333 1.115-1.333h2.885v-5h-3.808c-3.596 0-5.192 1.583-5.192 4.615v3.385z"/>
-                                    </svg>
-                                </a>
-                                <a href="https://x.com/1Sani8bot" target="_blank" class="bg-[#d1e7ff] p-2 rounded-full text-[#007fff] hover:bg-[#007fff] hover:text-white transition border border-blue-300">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
-                                        <path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z"/>
-                                    </svg>
-                                </a>
-                                <a href="https://www.instagram.com/sani_bott/" target="_blank" class="bg-[#d1e7ff] p-2 rounded-full text-[#007fff] hover:bg-[#007fff] hover:text-white transition border border-blue-300">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
-                                        <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
-                                    </svg>
-                                </a>
-                                <a href="https://www.youtube.com/channel/UCjgXPyqccA3K4kjuDwjX4Fg" target="_blank" class="bg-[#d1e7ff] p-2 rounded-full text-[#007fff] hover:bg-[#007fff] hover:text-white transition border border-blue-300">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
-                                        <path d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z"/>
-                                    </svg>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div>
-                        <h3 class="text-xl font-semibold text-[#007fff] mb-6">Envie uma Mensagem</h3>
-                        <form class="space-y-4">
-                            <div>
-                                <label for="name" class="block text-sm font-medium text-[#00508c] mb-1">Nome</label>
-                                <input type="text" id="name" class="w-full px-4 py-2 bg-white border border-blue-300 rounded-lg focus:ring-[#007fff] focus:border-[#007fff] text-[#00508c]">
-                            </div>
-                            <div>
-                                <label for="email" class="block text-sm font-medium text-[#00508c] mb-1">E-mail</label>
-                                <input type="email" id="email" class="w-full px-4 py-2 bg-white border border-blue-300 rounded-lg focus:ring-[#007fff] focus:border-[#007fff] text-[#00508c]">
-                            </div>
-                            <div>
-                                <label for="subject" class="block text-sm font-medium text-[#00508c] mb-1">Assunto</label>
-                                <input type="text" id="subject" class="w-full px-4 py-2 bg-white border border-blue-300 rounded-lg focus:ring-[#007fff] focus:border-[#007fff] text-[#00508c]">
-                            </div>
-                            <div>
-                                <label for="message" class="block text-sm font-medium text-[#00508c] mb-1">Mensagem</label>
-                                <textarea id="message" rows="4" class="w-full px-4 py-2 bg-white border border-blue-300 rounded-lg focus:ring-[#007fff] focus:border-[#007fff] text-[#00508c]"></textarea>
-                            </div>
-                            <button type="submit" class="blue-gradient text-white px-6 py-2 rounded-lg font-medium hover:opacity-90 transition w-full border border-blue-300 glow-border">Enviar Mensagem</button>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer class="bg-[#007fff] text-white py-10 px-4 border-t border-blue-300">
-        <div class="container mx-auto">
-            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
-                <div>
-                    <h3 class="text-xl font-bold mb-4 glow-text">SaniBot</h3>
-                    <p class="text-blue-100">Transformando a limpeza doméstica com tecnologia avançada e design intuitivo.</p>
-                </div>
-                <div>
-                    <h4 class="font-semibold mb-4 text-white">Links Rápidos</h4>
-                    <ul class="space-y-2">
-                        <li><a href="#" class="text-blue-100 hover:text-white transition">Início</a></li>
-                        <li><a href="#sobre" class="text-blue-100 hover:text-white transition">Sobre Nós</a></li>
-                        <li><a href="#produto" class="text-blue-100 hover:text-white transition">EchoBot</a></li>
-                        <li><a href="#detalhes" class="text-blue-100 hover:text-white transition">Detalhes</a></li>
-                        <li><a href="#contato" class="text-blue-100 hover:text-white transition">Contato</a></li>
-                    </ul>
-                </div>
-                <div>
-                    <h4 class="font-semibold mb-4 text-white">Contato</h4>
-                    <ul class="space-y-2 text-blue-100">
-                        <li>(14) 99688-0452</li>
-                        <li>(14) 99761-4102</li>
-                        <li>bernardoydenki@gmail.com</li>
-                        <li>kibbyns@gmail.com</li>
-                        <li>2sa8bot@gmail.com</li>
-                    </ul>
-                </div>
-                <div>
-                    <h4 class="font-semibold mb-4 text-white">Newsletter</h4>
-                    <p class="text-blue-100 mb-4">Inscreva-se para receber novidades e promoções.</p>
-                    <form class="flex">
-                        <input type="email" placeholder="Seu e-mail" class="px-4 py-2 rounded-l-lg w-full focus:outline-none bg-white text-[#00508c] border border-blue-300">
-                        <button type="submit" class="bg-[#00508c] px-4 py-2 rounded-r-lg hover:bg-[#003b66] transition">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
-                            </svg>
-                        </button>
-                    </form>
-                </div>
-            </div>
-            <div class="border-t border-blue-500 mt-8 pt-8 flex flex-col md:flex-row justify-between items-center">
-                <p class="text-blue-100">&copy; 2023 SaniBot. Todos os direitos reservados.</p>
-                <div class="flex space-x-4 mt-4 md:mt-0">
-                    <a href="#" class="text-blue-100 hover:text-white transition">Termos de Uso</a>
-                    <a href="#" class="text-blue-100 hover:text-white transition">Política de Privacidade</a>
-                </div>
-            </div>
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Robôs de Limpeza - Todos os direitos reservados.</p>
         </div>
     </footer>
-
-    <script src="script.js"></script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'94703e83b43ef181',t:'MTc0ODQ2MTQ0MC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</body>
 </html>
