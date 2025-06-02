@@ -1,94 +1,719 @@
+
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Robôs de Limpeza - Seu Lar Impecável</title>
-    <link rel="stylesheet" href="style.css">
+    <title>SaniB0T - Robôs para Serviços Essenciais</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Orbitron:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            scroll-behavior: smooth;
+        }
+        .tech-font {
+            font-family: 'Orbitron', sans-serif;
+        }
+        .feature-card {
+            transition: all 0.3s ease;
+        }
+        .feature-card:hover {
+            transform: translateY(-5px);
+        }
+        .testimonial-card {
+            transition: all 0.3s ease;
+        }
+        .testimonial-card:hover {
+            transform: translateY(-5px);
+        }
+        .stats-counter {
+            font-family: 'Orbitron', sans-serif;
+        }
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+        .floating {
+            animation: float 3s ease-in-out infinite;
+        }
+        .timeline-item {
+            position: relative;
+        }
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            width: 2px;
+            background-color: #60a5fa;
+            top: 0;
+            bottom: 0;
+            left: 15px;
+        }
+        .timeline-dot {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background-color: #60a5fa;
+            border-radius: 50%;
+            left: 6px;
+            top: 0;
+        }
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 100;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.5);
+        }
+        .modal-content {
+            background-color: #fefefe;
+            margin: 5% auto;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            max-width: 800px;
+            width: 90%;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+    </style>
 </head>
 <body>
-    <header>
-        <div class="container">
-            <h1><a href="/">Robôs de Limpeza</a></h1>
-            <nav>
-                <ul>
-                    <li><a href="#">Produtos</a></li>
-                    <li><a href="#">Sobre Nós</a></li>
-                    <li><a href="#">Contato</a></li>
-                    <li><a href="#">Carrinho (0)</a></li>
-                </ul>
-            </nav>
-        </div>
-    </header>
-
-    <main>
-        <section class="hero">
-            <div class="container">
-                <div class="hero-content">
-                    <h2>Liberte-se da Limpeza!</h2>
-                    <p>Encontre o robô de limpeza perfeito para o seu lar.</p>
-                    <a href="#" class="button">Ver Produtos</a>
+    <!-- Navigation -->
+    <nav class="bg-white shadow-md sticky top-0 z-50">
+        <div class="container mx-auto px-4 py-3">
+            <div class="flex justify-between items-center">
+                <a href="#" class="flex items-center">
+                    <span class="text-sky-500 text-3xl mr-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z" />
+                        </svg>
+                    </span>
+                    <span class="tech-font font-bold text-2xl text-gray-800">SaniB0T</span>
+                </a>
+                <div class="hidden md:flex space-x-8">
+                    <a href="#sobre" class="text-gray-700 hover:text-sky-500 transition">Sobre Nós</a>
+                    <a href="#echobot" class="text-gray-700 hover:text-sky-500 transition">EchoB0T</a>
+                    <a href="#tecnologia" class="text-gray-700 hover:text-sky-500 transition">Tecnologia</a>
+                    <a href="#precos" class="text-gray-700 hover:text-sky-500 transition">Preços</a>
                 </div>
-                <div class="hero-image">
-                    <img src="placeholder-robo.png" alt="Robô de Limpeza">
+                <div class="flex items-center">
+                    <button id="cart-button" class="text-gray-700 hover:text-sky-500 mr-4 relative">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
+                        </svg>
+                        <span id="cart-count" class="absolute -top-2 -right-2 bg-sky-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">0</span>
+                    </button>
+                    <div class="md:hidden">
+                        <button id="mobile-menu-button" class="text-gray-700 hover:text-sky-500 focus:outline-none">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                            </svg>
+                        </button>
                     </div>
+                </div>
             </div>
-        </section>
-
-        <section class="products">
-            <div class="container">
-                <h2>Nossos Robôs de Limpeza</h2>
-                <div class="product-grid">
-                    <div class="product-card">
-                        <img src="placeholder-robo-pequeno.png" alt="Robô Modelo 1">
-                        <h3>Robô Aspirador Inteligente</h3>
-                        <p>Ideal para todos os tipos de piso.</p>
-                        <span class="price">R$ 499,99</span>
-                        <button class="button">Adicionar ao Carrinho</button>
-                    </div>
-                    <div class="product-card">
-                        <img src="placeholder-robo-pequeno.png" alt="Robô Modelo 2">
-                        <h3>Robô Aspirador e Passa Pano</h3>
-                        <p>Limpeza completa para sua casa.</p>
-                        <span class="price">R$ 799,99</span>
-                        <button class="button">Adicionar ao Carrinho</button>
-                    </div>
-                    <div class="product-card">
-                        <img src="placeholder-robo-pequeno.png" alt="Robô Modelo 3">
-                        <h3>Robô Limpa Vidros Automático</h3>
-                        <p>Janelas limpas sem esforço.</p>
-                        <span class="price">R$ 549,99</span>
-                        <button class="button">Adicionar ao Carrinho</button>
-                    </div>
-                    </div>
+            <div id="mobile-menu" class="md:hidden hidden py-3">
+                <a href="#sobre" class="block py-2 text-gray-700 hover:text-sky-500 transition">Sobre Nós</a>
+                <a href="#echobot" class="block py-2 text-gray-700 hover:text-sky-500 transition">EchoB0T</a>
+                <a href="#tecnologia" class="block py-2 text-gray-700 hover:text-sky-500 transition">Tecnologia</a>
+                <a href="#precos" class="block py-2 text-gray-700 hover:text-sky-500 transition">Preços</a>
             </div>
-        </section>
-
-        <section class="about">
-            <div class="container">
-                <h2>Sobre Nós</h2>
-                <p>Somos especialistas em robôs de limpeza, oferecendo soluções inovadoras para facilitar o seu dia a dia. Nossa missão é proporcionar mais tempo livre para você aproveitar o que realmente importa.</p>
-            </div>
-        </section>
-
-        <section class="contact">
-            <div class="container">
-                <h2>Entre em Contato</h2>
-                <p>Dúvidas ou sugestões? Fale conosco!</p>
-                <form>
-                    <input type="text" placeholder="Seu Nome">
-                    <input type="email" placeholder="Seu Email">
-                    <textarea placeholder="Sua Mensagem"></textarea>
-                    <button type="submit" class="button">Enviar Mensagem</button>
-                </form>
-            </div>
-        </section>
-    </main>
-
-    <footer>
-        <div class="container">
-            <p>&copy; 2025 Robôs de Limpeza - Todos os direitos reservados.</p>
         </div>
-    </footer>
-</body>
-</html>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="bg-gradient-to-r from-sky-100 to-sky-200 py-20">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row items-center">
+                <div class="md:w-1/2 mb-10 md:mb-0">
+                    <h1 class="tech-font text-4xl md:text-5xl font-bold mb-4 text-gray-800">Revolucione seu Dia a Dia com o EchoB0T</h1>
+                    <p class="text-lg mb-8 text-gray-700">Automatize tarefas domésticas e ganhe mais tempo para o que realmente importa.</p>
+                    <div class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
+                        <a href="#echobot" class="bg-sky-500 hover:bg-sky-600 text-white font-medium py-3 px-6 rounded-lg transition text-center">Conheça o EchoB0T</a>
+                        <a href="#precos" class="bg-transparent border-2 border-sky-500 hover:bg-sky-500 hover:text-white text-sky-500 font-medium py-3 px-6 rounded-lg transition text-center">Ver Preços</a>
+                    </div>
+                </div>
+                <div class="md:w-1/2 flex justify-center">
+                    <div class="relative floating">
+                        <svg class="w-64 h-64 md:w-80 md:h-80" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                            <!-- Robot Body -->
+                            <rect x="60" y="80" width="80" height="70" rx="10" fill="#60a5fa" />
+                            <!-- Robot Head -->
+                            <rect x="70" y="40" width="60" height="50" rx="5" fill="#93c5fd" />
+                            <!-- Robot Eyes -->
+                            <circle cx="85" cy="60" r="10" fill="#ffffff" />
+                            <circle cx="115" cy="60" r="10" fill="#ffffff" />
+                            <circle cx="85" cy="60" r="5" fill="#1e3a8a" />
+                            <circle cx="115" cy="60" r="5" fill="#1e3a8a" />
+                            <!-- Robot Arms -->
+                            <rect x="40" y="90" width="20" height="40" rx="5" fill="#93c5fd" />
+                            <rect x="140" y="90" width="20" height="40" rx="5" fill="#93c5fd" />
+                            <!-- Robot Wheels -->
+                            <rect x="65" y="150" width="70" height="10" rx="5" fill="#1e3a8a" />
+                            <circle cx="75" cy="160" r="10" fill="#1e3a8a" />
+                            <circle cx="125" cy="160" r="10" fill="#1e3a8a" />
+                        </svg>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="py-10 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+                <div class="p-4">
+                    <div class="stats-counter text-4xl font-bold text-sky-500 mb-2">2500+</div>
+                    <p class="text-gray-600">Robôs Vendidos</p>
+                </div>
+                <div class="p-4">
+                    <div class="stats-counter text-4xl font-bold text-sky-500 mb-2">98%</div>
+                    <p class="text-gray-600">Clientes Satisfeitos</p>
+                </div>
+                <div class="p-4">
+                    <div class="stats-counter text-4xl font-bold text-sky-500 mb-2">15+</div>
+                    <p class="text-gray-600">Prêmios de Inovação</p>
+                </div>
+                <div class="p-4">
+                    <div class="stats-counter text-4xl font-bold text-sky-500 mb-2">24/7</div>
+                    <p class="text-gray-600">Suporte Técnico</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="sobre" class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="tech-font text-3xl font-bold text-gray-800 mb-4">Sobre a SaniB0T</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">Somos uma empresa inovadora especializada em robótica para automatizar tarefas cotidianas que muitas vezes são esquecidas ou consideradas pequenas demais.</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="feature-card bg-sky-50 p-6 rounded-xl shadow-md">
+                    <div class="text-sky-500 mb-4">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">Inovação Constante</h3>
+                    <p class="text-gray-600">Nossa equipe de engenheiros trabalha constantemente para desenvolver soluções robóticas que simplificam seu dia a dia.</p>
+                </div>
+                <div class="feature-card bg-sky-50 p-6 rounded-xl shadow-md">
+                    <div class="text-sky-500 mb-4">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z" />
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">Sustentabilidade</h3>
+                    <p class="text-gray-600">Nossos robôs são projetados para serem energeticamente eficientes e fabricados com materiais recicláveis.</p>
+                </div>
+                <div class="feature-card bg-sky-50 p-6 rounded-xl shadow-md">
+                    <div class="text-sky-500 mb-4">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">Foco no Cliente</h3>
+                    <p class="text-gray-600">Desenvolvemos robôs que realmente atendem às necessidades dos nossos clientes, com suporte técnico 24 horas.</p>
+                </div>
+            </div>
+            <div class="mt-12">
+                <div class="bg-sky-50 p-6 rounded-xl shadow-md">
+                    <h3 class="text-xl font-semibold mb-4 text-center">Nossa História</h3>
+                    <div class="space-y-8 pl-10">
+                        <div class="timeline-item pl-6 pb-8">
+                            <div class="timeline-dot"></div>
+                            <h4 class="font-semibold text-lg">2020 - Fundação</h4>
+                            <p class="text-gray-600">A SaniB0T foi fundada por um grupo de engenheiros apaixonados por robótica e automação, com o objetivo de criar soluções acessíveis para tarefas cotidianas.</p>
+                        </div>
+                        <div class="timeline-item pl-6 pb-8">
+                            <div class="timeline-dot"></div>
+                            <h4 class="font-semibold text-lg">2021 - Primeiro Protótipo</h4>
+                            <p class="text-gray-600">Desenvolvimento do primeiro protótipo do EchoB0T, inspirado no design e funcionalidades do personagem WALL-E.</p>
+                        </div>
+                        <div class="timeline-item pl-6 pb-8">
+                            <div class="timeline-dot"></div>
+                            <h4 class="font-semibold text-lg">2022 - Lançamento Oficial</h4>
+                            <p class="text-gray-600">Lançamento oficial do EchoB0T no mercado, com grande aceitação e reconhecimento da indústria de tecnologia.</p>
+                        </div>
+                        <div class="timeline-item pl-6">
+                            <div class="timeline-dot"></div>
+                            <h4 class="font-semibold text-lg">2023 - Expansão</h4>
+                            <p class="text-gray-600">Expansão da linha de produtos e início das operações internacionais, levando a tecnologia SaniB0T para diversos países.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- EchoB0T Section -->
+    <section id="echobot" class="py-16 bg-sky-50">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="tech-font text-3xl font-bold text-gray-800 mb-4">Conheça o EchoB0T</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">Seu assistente doméstico inteligente, inspirado no adorável WALL-E, projetado para tornar sua vida mais fácil.</p>
+            </div>
+            <div class="flex flex-col md:flex-row items-center">
+                <div class="md:w-1/2 mb-8 md:mb-0">
+                    <div class="bg-white p-4 rounded-xl shadow-lg">
+                        <svg class="w-full h-64 md:h-80" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                            <!-- Robot Body -->
+                            <rect x="60" y="80" width="80" height="70" rx="10" fill="#60a5fa" />
+                            <!-- Robot Head -->
+                            <rect x="70" y="40" width="60" height="50" rx="5" fill="#93c5fd" />
+                            <!-- Robot Eyes -->
+                            <circle cx="85" cy="60" r="10" fill="#ffffff" />
+                            <circle cx="115" cy="60" r="10" fill="#ffffff" />
+                            <circle cx="85" cy="60" r="5" fill="#1e3a8a" />
+                            <circle cx="115" cy="60" r="5" fill="#1e3a8a" />
+                            <!-- Robot Arms -->
+                            <rect x="40" y="90" width="20" height="40" rx="5" fill="#93c5fd" />
+                            <rect x="140" y="90" width="20" height="40" rx="5" fill="#93c5fd" />
+                            <!-- Robot Hands -->
+                            <circle cx="50" cy="140" r="8" fill="#dbeafe" />
+                            <circle cx="150" cy="140" r="8" fill="#dbeafe" />
+                            <!-- Robot Wheels -->
+                            <rect x="65" y="150" width="70" height="10" rx="5" fill="#1e3a8a" />
+                            <circle cx="75" cy="160" r="10" fill="#1e3a8a" />
+                            <circle cx="125" cy="160" r="10" fill="#1e3a8a" />
+                            <!-- Robot Details -->
+                            <rect x="80" y="100" width="40" height="20" rx="3" fill="#dbeafe" />
+                            <circle cx="90" cy="110" r="3" fill="#3b82f6" />
+                            <circle cx="100" cy="110" r="3" fill="#3b82f6" />
+                            <circle cx="110" cy="110" r="3" fill="#3b82f6" />
+                        </svg>
+                    </div>
+                </div>
+                <div class="md:w-1/2 md:pl-8">
+                    <h3 class="text-2xl font-semibold mb-4">Características do EchoB0T</h3>
+                    <ul class="space-y-4">
+                        <li class="flex items-start">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-sky-500 mr-2 mt-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                            </svg>
+                            <div>
+                                <h4 class="font-medium">Limpeza Inteligente</h4>
+                                <p class="text-gray-600">Sensores avançados que detectam sujeira e poeira, adaptando a limpeza conforme necessário.</p>
+                            </div>
+                        </li>
+                        <li class="flex items-start">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-sky-500 mr-2 mt-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                            </svg>
+                            <div>
+                                <h4 class="font-medium">Organização de Ambientes</h4>
+                                <p class="text-gray-600">Capaz de organizar objetos pequenos e médios, devolvendo-os aos seus lugares corretos.</p>
+                            </div>
+                        </li>
+                        <li class="flex items-start">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-sky-500 mr-2 mt-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                            </svg>
+                            <div>
+                                <h4 class="font-medium">Assistente Pessoal</h4>
+                                <p class="text-gray-600">Integração com assistentes de voz para lembretes, controle de dispositivos inteligentes e muito mais.</p>
+                            </div>
+                        </li>
+                        <li class="flex items-start">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-sky-500 mr-2 mt-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                            </svg>
+                            <div>
+                                <h4 class="font-medium">Autonomia Energética</h4>
+                                <p class="text-gray-600">Bateria de longa duração com retorno automático à base de carregamento quando necessário.</p>
+                            </div>
+                        </li>
+                        <li class="flex items-start">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-sky-500 mr-2 mt-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                            </svg>
+                            <div>
+                                <h4 class="font-medium">Personalidade Amigável</h4>
+                                <p class="text-gray-600">Interface interativa com respostas sonoras e visuais que tornam a interação mais humana e agradável.</p>
+                            </div>
+                        </li>
+                    </ul>
+                    <div class="mt-6">
+                        <button class="add-to-cart bg-sky-500 hover:bg-sky-600 text-white font-medium py-3 px-6 rounded-lg transition inline-block" data-id="echobot" data-name="EchoB0T" data-price="5499" data-image="echobot">Adicionar ao Carrinho</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Technology Section -->
+    <section id="tecnologia" class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="tech-font text-3xl font-bold text-gray-800 mb-4">Nossa Tecnologia</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">Conheça as tecnologias avançadas que fazem do EchoB0T um assistente doméstico revolucionário.</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
+                <div class="bg-sky-50 p-6 rounded-xl shadow-md">
+                    <h3 class="text-xl font-semibold mb-4 flex items-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-sky-500 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                        </svg>
+                        Inteligência Artificial Avançada
+                    </h3>
+                    <p class="text-gray-600 mb-4">O EchoB0T utiliza algoritmos de aprendizado de máquina para se adaptar às suas preferências e rotinas, melhorando continuamente seu desempenho.</p>
+                    <ul class="space-y-2">
+                        <li class="flex items-start">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-sky-500 mr-2 mt-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                            </svg>
+                            <span>Reconhecimento de padrões de comportamento</span>
+                        </li>
+                        <li class="flex items-start">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-sky-500 mr-2 mt-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                            </svg>
+                            <span>Adaptação a diferentes ambientes</span>
+                        </li>
+                        <li class="flex items-start">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-sky-500 mr-2 mt-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                            </svg>
+                            <span>Processamento de linguagem natural</span>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="bg-sky-50 p-6 rounded-xl shadow-md">
+                    <h3 class="text-xl font-semibold mb-4 flex items-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-sky-500 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                        </svg>
+                        Sensores de Última Geração
+                    </h3>
+                    <p class="text-gray-600 mb-4">Equipado com uma variedade de sensores que permitem ao EchoB0T navegar com precisão e interagir com o ambiente de forma segura.</p>
+                    <ul class="space-y-2">
+                        <li class="flex items-start">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-sky-500 mr-2 mt-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                            </svg>
+                            <span>Sensores LiDAR para mapeamento 3D</span>
+                        </li>
+                        <li class="flex items-start">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-sky-500 mr-2 mt-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                            </svg>
+                            <span>Câmeras de alta resolução</span>
+                        </li>
+                        <li class="flex items-start">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-sky-500 mr-2 mt-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                            </svg>
+                            <span>Sensores de proximidade e obstáculos</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="bg-sky-50 p-6 rounded-xl shadow-md">
+                    <h3 class="text-xl font-semibold mb-4 flex items-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-sky-500 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                        </svg>
+                        Sistema de Energia Eficiente
+                    </h3>
+                    <p class="text-gray-600 mb-4">Bateria de alta capacidade com tecnologia de carregamento rápido e gerenciamento inteligente de energia.</p>
+                    <ul class="space-y-2">
+                        <li class="flex items-start">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-sky-500 mr-2 mt-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                            </svg>
+                            <span>Até 24 horas de autonomia</span>
+                        </li>
+                        <li class="flex items-start">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-sky-500 mr-2 mt-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                            </svg>
+                            <span>Retorno automático à base de carregamento</span>
+                        </li>
+                        <li class="flex items-start">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-sky-500 mr-2 mt-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                            </svg>
+                            <span>Modo de economia de energia</span>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="bg-sky-50 p-6 rounded-xl shadow-md">
+                    <h3 class="text-xl font-semibold mb-4 flex items-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-sky-500 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z" />
+                        </svg>
+                        Conectividade Total
+                    </h3>
+                    <p class="text-gray-600 mb-4">Integração perfeita com dispositivos inteligentes e sistemas de automação residencial.</p>
+                    <ul class="space-y-2">
+                        <li class="flex items-start">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-sky-500 mr-2 mt-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                            </svg>
+                            <span>Wi-Fi e Bluetooth de última geração</span>
+                        </li>
+                        <li class="flex items-start">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-sky-500 mr-2 mt-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                            </svg>
+                            <span>Compatível com Alexa, Google Assistant e Siri</span>
+                        </li>
+                        <li class="flex items-start">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-sky-500 mr-2 mt-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                            </svg>
+                            <span>Aplicativo móvel para controle remoto</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="mt-12 bg-sky-100 p-8 rounded-xl shadow-md">
+                <h3 class="text-2xl font-semibold mb-6 text-center">Processo de Fabricação</h3>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="text-center">
+                        <div class="bg-white w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4 shadow-md">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-sky-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+                            </svg>
+                        </div>
+                        <h4 class="font-medium mb-2">Projeto</h4>
+                        <p class="text-gray-600 text-sm">Projetado por engenheiros especializados em robótica e design de produto.</p>
+                    </div>
+                    <div class="text-center">
+                        <div class="bg-white w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4 shadow-md">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-sky-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                            </svg>
+                        </div>
+                        <h4 class="font-medium mb-2">Produção</h4>
+                        <p class="text-gray-600 text-sm">Fabricado com materiais sustentáveis em instalações de alta tecnologia.</p>
+                    </div>
+                    <div class="text-center">
+                        <div class="bg-white w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4 shadow-md">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-sky-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                            </svg>
+                        </div>
+                        <h4 class="font-medium mb-2">Qualidade</h4>
+                        <p class="text-gray-600 text-sm">Rigorosos testes de qualidade garantem a durabilidade e eficiência do produto.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="py-16 bg-sky-50">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="tech-font text-3xl font-bold text-gray-800 mb-4">O Que Nossos Clientes Dizem</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">Descubra como o EchoB0T está transformando a vida de pessoas como você.</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="testimonial-card bg-white p-6 rounded-xl shadow-md">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 rounded-full bg-sky-100 flex items-center justify-center mr-4">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-sky-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                            </svg>
+                        </div>
+                        <div>
+                            <h4 class="font-medium">Ana Silva</h4>
+                            <p class="text-gray-500 text-sm">São Paulo, SP</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-600">"O EchoB0T mudou completamente minha rotina. Agora tenho mais tempo para me dedicar à família enquanto ele cuida das tarefas domésticas. É como ter um assistente pessoal 24 horas por dia!"</p>
+                    <div class="mt-4 flex text-yellow-400">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                        </svg>
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                        </svg>
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                        </svg>
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                        </svg>
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                        </svg>
+                    </div>
+                </div>
+                <div class="testimonial-card bg-white p-6 rounded-xl shadow-md">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 rounded-full bg-sky-100 flex items-center justify-center mr-4">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-sky-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                            </svg>
+                        </div>
+                        <div>
+                            <h4 class="font-medium">Carlos Mendes</h4>
+                            <p class="text-gray-500 text-sm">Rio de Janeiro, RJ</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-600">"Inicialmente estava cético, mas o EchoB0T superou todas as minhas expectativas. Ele mantém meu apartamento organizado e limpo, e a integração com meus dispositivos inteligentes é perfeita!"</p>
+                    <div class="mt-4 flex text-yellow-400">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                        </svg>
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                        </svg>
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                        </svg>
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                        </svg>
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                        </svg>
+                    </div>
+                </div>
+                <div class="testimonial-card bg-white p-6 rounded-xl shadow-md">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 rounded-full bg-sky-100 flex items-center justify-center mr-4">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-sky-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                            </svg>
+                        </div>
+                        <div>
+                            <h4 class="font-medium">Mariana Costa</h4>
+                            <p class="text-gray-500 text-sm">Belo Horizonte, MG</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-600">"Como mãe de três crianças, o EchoB0T tem sido um verdadeiro salva-vidas. Ele ajuda a manter a casa organizada e as crianças adoram interagir com ele. Foi um investimento que valeu cada centavo!"</p>
+                    <div class="mt-4 flex text-yellow-400">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                        </svg>
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                        </svg>
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                        </svg>
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                        </svg>
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                        </svg>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section id="precos" class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="tech-font text-3xl font-bold text-gray-800 mb-4">Planos e Preços</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">Escolha o plano que melhor se adapta às suas necessidades.</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+                <div class="bg-white rounded-xl shadow-md overflow-hidden transition transform hover:-translate-y-1 hover:shadow-lg">
+                    <div class="p-6 bg-sky-50">
+                        <h3 class="tech-font text-xl font-bold text-gray-800 mb-2">Básico</h3>
+                        <div class="text-sky-500 text-3xl font-bold mb-4">R$ 3.999</div>
+                        <p class="text-gray-600">Ideal para tarefas domésticas simples.</p>
+                    </div>
+                    <div class="p-6">
+                        <ul class="space-y-3">
+                            <li class="flex items-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-sky-500 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                                </svg>
+                                <span>Limpeza básica</span>
+                            </li>
+                            <li class="flex items-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-sky-500 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                                </svg>
+                                <span>Organização simples</span>
+                            </li>
+                            <li class="flex items-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-sky-500 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                                </svg>
+                                <span>Bateria de 6 horas</span>
+                            </li>
+                            <li class="flex items-center text-gray-400">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                                </svg>
+                                <span>Assistente de voz</span>
+                            </li>
+                            <li class="flex items-center text-gray-400">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                                </svg>
+                                <span>Personalização avançada</span>
+                            </li>
+                        </ul>
+                        <div class="mt-6">
+                            <button class="add-to-cart block w-full text-center bg-sky-500 hover:bg-sky-600 text-white font-medium py-2 px-4 rounded-lg transition" data-id="basic" data-name="EchoB0T Básico" data-price="3999" data-image="echobot-basic">Adicionar ao Carrinho</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-white rounded-xl shadow-md overflow-hidden transform scale-105 z-10 shadow-lg border-2 border-sky-500">
+                    <div class="absolute top-0 right-0 bg-sky-500 text-white text-xs font-bold px-3 py-1 rounded-bl-lg">MAIS POPULAR</div>
+                    <div class="p-6 bg-sky-100">
+                        <h3 class="tech-font text-xl font-bold text-gray-800 mb-2">Premium</h3>
+                        <div class="text-sky-500 text-3xl font-bold mb-4">R$ 5.499</div>
+                        <p class="text-gray-600">Perfeito para a maioria das residências.</p>
+                    </div>
+                    <div class="p-6">
+                        <ul class="space-y-3">
+                            <li class="flex items-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-sky-500 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                                </svg>
+                                <span>Limpeza avançada</span>
+                            </li>
+                            <li class="flex items-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-sky-500 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                                </svg>
+                                <span>Organização completa</span>
+                            </li>
+                            <li class="flex items-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-sky-500 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                                </svg>
+                                <span>Bateria de 12 horas</span>
+                            </li>
+                            <li class="flex items-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-sky-500 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                                </svg>
+                                <span>Assistente de voz</span>
+                            </li>
+                            <li class="flex items-center text-gray-400">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                                </svg>
+                                <span>Personalização avançada</span>
+                            </li>
+                        </ul>
+                        <div class="mt-6">
+                            <button class="add-to-cart block w-full text-center bg-sky-500 hover:bg-sky-600 text-white font-medium py-2 px-4 rounded-lg transition" data-id="premium" data-name="EchoB0T Premium" data-price="5499" data-image="echobot-premium">Adicionar ao Carrinho<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9492a57251046aa5',t:'MTc0ODgyMjE3Mi4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script>
